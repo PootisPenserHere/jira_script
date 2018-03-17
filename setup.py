@@ -11,6 +11,12 @@ args = parser.parse_args()
 config = configparser.ConfigParser()
 config['jira'] = {}
 config['jira']['baseUrl'] = args.baseUrl
+config['jira']['apiPartUrl'] = "/rest" # This is what follows the jira url
+config['jira']['listsBoardsUrlPart'] = "agile/1.0/board"
+config['jira']['listsIssuesByBoardPart1Url'] = "/agile/1.0/board/"
+config['jira']['listsIssuesByBoardPart2Url'] = "/issue"
+config['jira']['metadataForIssues'] = "/api/2/issue/createmeta"
+config['jira']['sendIssueUrl'] = "/api/2/issue/"
 config['jira']['userName'] = args.userName
 config['jira']['apiKey'] = args.apiKey
 
