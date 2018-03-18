@@ -5,12 +5,9 @@ class jira(object):
     def __init__(self):
         import configparser
         import requests
-        import json
         
         # To do http requests
         self.requests = requests
-        
-        self.json = json
         
         # Data parsed from the config file
         config = configparser.ConfigParser()
@@ -28,15 +25,27 @@ class jira(object):
     def listBoards(self):
         return self.requests.get(self.boardListingUrl, auth=(self.userName, self.apikey))
 
+""" Abstracts the process of converting the output from from the requests 
+into more workable json objects
+"""
+class outputHandler():
+    def __init__(self):
+        import json
+        
+        self.json = json
+        
+    def outputToJson(self, data):
+        data = data.text
+        data = self.json.loads(data)
+        return self.json.dumps(data, sort_keys=True, indent=4)
+
 """ The application logic 
 
 The classes above will be used here to serve the requests made to the 
 script
 """
-import json
-
 jira = jira()
+outputHandler = outputHandler()
+
 output = jira.listBoards()
-output = output.text
-output = json.loads(output)
-print json.dumps(output, sort_keys=True, indent=4)
+print outputHandler.outputToJson(output)
