@@ -1,2 +1,4 @@
 configparser
 argparse
+requests
+json
