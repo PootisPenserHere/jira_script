@@ -59,8 +59,26 @@ class Jira(object):
 The classes above will be used here to serve the requests made to the 
 script
 """
+import argparse
+
+parser = argparse.ArgumentParser()
+requiredNamed = parser.add_argument_group('Required named arguments')
+requiredNamed.add_argument('-a', '--action', type=str, help='The desired type of action to interact with jira', required=True)
+args = parser.parse_args()
+
 jira = Jira(Requester)
 outputHandler = OutputHandler()
 
-output = jira.listBoards()
-print outputHandler.outputToJson(output)
+def listBoards():
+    output = jira.listBoards()
+    return outputHandler.outputToJson(output)
+
+def test():
+    return 1
+
+if args.action == "listBoards":
+    print listBoards()
+elif args.action == "test":
+    print test()
+else:
+    print "Invalid action"
