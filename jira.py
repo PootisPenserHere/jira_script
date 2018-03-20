@@ -69,6 +69,7 @@ parser = argparse.ArgumentParser()
 requiredNamed = parser.add_argument_group('Required named arguments')
 requiredNamed.add_argument('-a', '--action', type=str, help='The desired type of action to interact with jira', required=True)
 parser.add_argument('--boardName', type=str, help='Name of the board', default=None)
+parser.add_argument('--maxBoards', type=str, help='Maximun amount of board to return by default 50', default=50)
 args = parser.parse_args()
 
 jira = Jira(Requester)
@@ -85,6 +86,7 @@ if args.action == "listBoards":
     payload = {}
     if args.boardName is not None:
         payload['name'] = args.boardName
+    payload['maxResults'] = args.maxBoards
 
     print listBoards(payload)
 elif args.action == "test":
