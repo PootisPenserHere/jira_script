@@ -30,7 +30,7 @@ class Requester():
     @param url string - url to make the requests to 
     @param payload dict - contains the values to be sent
     """
-    def generalPurpose(self, url, payload = None):
+    def getRequest(self, url, payload = None):
         return self.requests.get(url, auth=(self.user, self.password), params=payload)
         
         
@@ -53,10 +53,9 @@ class Jira(object):
         self.apiparturl = config['url']['apiparturl']
         
         self.boardListingUrl = "%s%s%s" % (self.baseUrl, self.apiparturl, config['boardListing']['urlpart'])
-        self.boardListingRequestType = config['boardListing']['requesttype']
         
     def listBoards(self, payload):
-        return self.requester.generalPurpose(self.boardListingUrl, payload)
+        return self.requester.getRequest(self.boardListingUrl, payload)
 
 """ The application logic 
 

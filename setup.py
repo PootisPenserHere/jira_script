@@ -18,21 +18,17 @@ config['url']['apiPartUrl'] = '/rest' # This is what follows the jira url
 
 config['boardListing'] = {}
 config['boardListing']['urlPart'] = '/agile/1.0/board'
-config['boardListing']['requestType'] = 'get'
 
 # <baseUrl>/rest/agile/1.0/<boardId>/293/issue 
 config['issuesByBoard'] = {}
 config['issuesByBoard']['urlPart1'] = '/agile/1.0/board/'
 config['issuesByBoard']['urlPart2'] = '/issue'
-config['issuesByBoard']['requestType'] = 'get'
 
 config['metadataForIssues'] = {}
 config['metadataForIssues']['urlPart'] = '/api/2/issue/createmeta'
-config['metadataForIssues']['requestType'] = 'get'
 
 config['sendIssue'] = {}
 config['sendIssue']['urlPart'] = '/api/2/issue'
-config['sendIssue']['requestType'] = 'post'
 
 with open('config.ini', 'w') as configfile:
   config.write(configfile)
