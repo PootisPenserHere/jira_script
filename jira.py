@@ -51,15 +51,16 @@ class Jira(object):
         config = configparser.ConfigParser()
         config.read('config.ini')
         
-        self.userName = config['auth']['userName']
-        self.apikey = config['auth']['apikey']
-        self.requester = Requester(self.userName, self.apikey)
+        # Intantiates the requester class
+        self.requester = Requester(config['auth']['userName'], config['auth']['apikey'])
 
-        self.baseUrl = config['url']['baseurl']
-        self.apiparturl = config['url']['apiparturl']
+        # Forms the base url to which all the api calls will be made
+        self.jiraUrl = "%s%s" % (config['url']['baseurl'], config['url']['apiparturl'])
         
-        self.boardListingUrl = "%s%s%s" % (self.baseUrl, self.apiparturl, config['boardListing']['urlpart'])
+        # Url to query the boards available to the user
+        self.boardListingUrl = "%s%s" % (self.jiraUrl, config['boardListing']['urlpart'])
         
+        # Required to form the url with parms for issues by board
         self.issuesByBoard1 = config['issuesByBoard']['urlpart1']
         self.issuesByBoard2 = config['issuesByBoard']['urlpart2']
         
@@ -67,7 +68,7 @@ class Jira(object):
         return self.requester.getRequest(self.boardListingUrl, payload)
         
     def issuesByBoardId(self, boardId, payload = None):
-        url = "%s%s%s%s%s" % (self.baseUrl, self.apiparturl, self.issuesByBoard1, boardId, self.issuesByBoard2)
+        url = "%s%s%s%s" % (self.jiraUrl, self.issuesByBoard1, boardId, self.issuesByBoard2)
         return self.requester.getRequest(url, payload)
 
 """ The application logic 
