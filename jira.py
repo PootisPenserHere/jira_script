@@ -74,9 +74,10 @@ import argparse
 parser = argparse.ArgumentParser()
 requiredNamed = parser.add_argument_group('Required named arguments')
 requiredNamed.add_argument('-a', '--action', type=str, help='The desired type of action to interact with jira', required=True)
-parser.add_argument('--boardName', type=str, help='Name of the board', default=None)
-parser.add_argument('--maxBoards', type=str, help='Maximun amount of board to return by default 50', default=50)
+parser.add_argument('--name', type=str, help='Name of the board', default=None)
+parser.add_argument('--maxResults', type=str, help='Maximun amount of board to return by default 50', default=None)
 parser.add_argument('--boardId', type=str, help='The id of the board')
+parser.add_argument('--startAt', type=int, help='The desired start point of the sequence', default=None)
 args = parser.parse_args()
 
 jira = Jira(Requester)
@@ -87,17 +88,23 @@ def listBoards(payload):
     return outputHandler.outputToJson(output)
 
 def issuesByBoard():
-    output = jira.issuesByBoardId(args.boardId)
+    output = jira.issuesByBoardId(args.boardId, payload)
     return outputHandler.outputToJson(output)
 
 if args.action == "listBoards":
     payload = {}
-    if args.boardName is not None:
-        payload['name'] = args.boardName
-    payload['maxResults'] = args.maxBoards
+    if args.name is not None:
+        payload['name'] = args.name
+    if args.maxResults is not None:
+        payload['maxResults'] = args.maxResults
 
     print listBoards(payload)
 elif args.action == "issuesByBoard":
+    payload = {}
+    if args.startAt is not None:
+        payload['startAt'] = args.startAt
+    if args.maxResults is not None:
+        payload['maxResults'] = args.maxResults
     print issuesByBoard()
 else:
     print "Invalid action"
