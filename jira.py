@@ -54,8 +54,15 @@ class Jira(object):
         
         self.boardListingUrl = "%s%s%s" % (self.baseUrl, self.apiparturl, config['boardListing']['urlpart'])
         
+        self.issuesByBoard1 = config['issuesByBoard']['urlpart1']
+        self.issuesByBoard2 = config['issuesByBoard']['urlpart2']
+        
     def listBoards(self, payload):
         return self.requester.getRequest(self.boardListingUrl, payload)
+        
+    def issuesByBoardId(self, boardId, payload = None):
+        url = "%s%s%s%s%s" % (self.baseUrl, self.apiparturl, self.issuesByBoard1, boardId, self.issuesByBoard2)
+        return self.requester.getRequest(url, payload)
 
 """ The application logic 
 
@@ -69,6 +76,7 @@ requiredNamed = parser.add_argument_group('Required named arguments')
 requiredNamed.add_argument('-a', '--action', type=str, help='The desired type of action to interact with jira', required=True)
 parser.add_argument('--boardName', type=str, help='Name of the board', default=None)
 parser.add_argument('--maxBoards', type=str, help='Maximun amount of board to return by default 50', default=50)
+parser.add_argument('--boardId', type=str, help='The id of the board')
 args = parser.parse_args()
 
 jira = Jira(Requester)
@@ -78,8 +86,9 @@ def listBoards(payload):
     output = jira.listBoards(payload)
     return outputHandler.outputToJson(output)
 
-def test():
-    return 1
+def issuesByBoard():
+    output = jira.issuesByBoardId(args.boardId)
+    return outputHandler.outputToJson(output)
 
 if args.action == "listBoards":
     payload = {}
@@ -88,7 +97,7 @@ if args.action == "listBoards":
     payload['maxResults'] = args.maxBoards
 
     print listBoards(payload)
-elif args.action == "test":
-    print test()
+elif args.action == "issuesByBoard":
+    print issuesByBoard()
 else:
     print "Invalid action"
