@@ -64,12 +64,18 @@ class Jira(object):
         self.issuesByBoard1 = config['issuesByBoard']['urlpart1']
         self.issuesByBoard2 = config['issuesByBoard']['urlpart2']
         
+        # Url to query the metadata for the issues
+        self.metadataForIssuesUrl = "%s%s" % (self.jiraUrl, config['metadataForIssues']['urlpart'])
+        
     def listBoards(self, payload):
         return self.requester.getRequest(self.boardListingUrl, payload)
         
     def issuesByBoardId(self, boardId, payload = None):
         url = "%s%s%s%s" % (self.jiraUrl, self.issuesByBoard1, boardId, self.issuesByBoard2)
         return self.requester.getRequest(url, payload)
+        
+    def metadataForIssues(self):
+        return self.requester.getRequest(self.metadataForIssuesUrl)
 
 """ The application logic 
 
@@ -98,6 +104,10 @@ def issuesByBoard():
     output = jira.issuesByBoardId(args.boardId, payload)
     return outputHandler.outputToJson(output)
 
+def metadataForIssues():
+    output = jira.metadataForIssues()
+    return outputHandler.outputToJson(output)
+
 if args.action == "listBoards":
     payload = {}
     if args.name is not None:
@@ -113,5 +123,7 @@ elif args.action == "issuesByBoard":
     if args.maxResults is not None:
         payload['maxResults'] = args.maxResults
     print issuesByBoard()
+elif args.action == "metadataForIssues":
+    print metadataForIssues()
 else:
     print "Invalid action"
