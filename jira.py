@@ -1,4 +1,4 @@
-""" Abstracts the process of converting the output from from the requests 
+""" Abstracts the process of converting the output from the requests 
 into more workable json objects
 """
 class OutputHandler(object):
@@ -7,6 +7,11 @@ class OutputHandler(object):
         
         self.json = json
         
+    """ Turns a object into the string form of a json and returns it as 
+    a beautified json
+    
+    @param data dict
+    """
     def outputToJson(self, data):
         data = data.text
         data = self.json.loads(data)
@@ -15,7 +20,7 @@ class OutputHandler(object):
 """ To make the requests to the jira plataform and return their raw 
 output 
 
-@param user string - the user name to sign into the jira plataform
+@param user string - the user name to sign into the jira platform
 @param password string - the api key or password for the authentication
 """
 class Requester():
@@ -26,7 +31,8 @@ class Requester():
         self.user = user
         self.password = password
     
-    """ Sends a generic get requests with the option to append values 
+    """ Sends a generic get requests with the option to append values
+    
     @param url string - url to make the requests to 
     @param payload dict - contains the values to be sent
     """
@@ -41,19 +47,20 @@ class Jira(object):
     def __init__(self, Requester):
         import configparser
         
-        # Data parsed from the config file
+        # Parsing data from the config file
         config = configparser.ConfigParser()
         config.read('config.ini')
         
-        self.userName = config['auth']['userName']
-        self.apikey = config['auth']['apikey']
-        self.requester = Requester(self.userName, self.apikey)
+        # Intantiates the requester class
+        self.requester = Requester(config['auth']['userName'], config['auth']['apikey'])
+
+        # Forms the base url to which all the api calls will be made
+        self.jiraUrl = "%s%s" % (config['url']['baseurl'], config['url']['apiparturl'])
         
-        self.baseUrl = config['url']['baseurl']
-        self.apiparturl = config['url']['apiparturl']
+        # Url to query the boards available to the user
+        self.boardListingUrl = "%s%s" % (self.jiraUrl, config['boardListing']['urlpart'])
         
-        self.boardListingUrl = "%s%s%s" % (self.baseUrl, self.apiparturl, config['boardListing']['urlpart'])
-        
+        # Required to form the url with parms for issues by board
         self.issuesByBoard1 = config['issuesByBoard']['urlpart1']
         self.issuesByBoard2 = config['issuesByBoard']['urlpart2']
         
@@ -61,7 +68,7 @@ class Jira(object):
         return self.requester.getRequest(self.boardListingUrl, payload)
         
     def issuesByBoardId(self, boardId, payload = None):
-        url = "%s%s%s%s%s" % (self.baseUrl, self.apiparturl, self.issuesByBoard1, boardId, self.issuesByBoard2)
+        url = "%s%s%s%s" % (self.jiraUrl, self.issuesByBoard1, boardId, self.issuesByBoard2)
         return self.requester.getRequest(url, payload)
 
 """ The application logic 
