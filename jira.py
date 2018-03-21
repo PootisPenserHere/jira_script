@@ -1,4 +1,4 @@
-""" Abstracts the process of converting the output from from the requests 
+""" Abstracts the process of converting the output from the requests 
 into more workable json objects
 """
 class OutputHandler(object):
@@ -7,6 +7,11 @@ class OutputHandler(object):
         
         self.json = json
         
+    """ Turns a object into the string form of a json and returns it as 
+    a beautified json
+    
+    @param data dict
+    """
     def outputToJson(self, data):
         data = data.text
         data = self.json.loads(data)
@@ -15,7 +20,7 @@ class OutputHandler(object):
 """ To make the requests to the jira plataform and return their raw 
 output 
 
-@param user string - the user name to sign into the jira plataform
+@param user string - the user name to sign into the jira platform
 @param password string - the api key or password for the authentication
 """
 class Requester():
@@ -26,7 +31,8 @@ class Requester():
         self.user = user
         self.password = password
     
-    """ Sends a generic get requests with the option to append values 
+    """ Sends a generic get requests with the option to append values
+    
     @param url string - url to make the requests to 
     @param payload dict - contains the values to be sent
     """
@@ -41,14 +47,14 @@ class Jira(object):
     def __init__(self, Requester):
         import configparser
         
-        # Data parsed from the config file
+        # Parsing data from the config file
         config = configparser.ConfigParser()
         config.read('config.ini')
         
         self.userName = config['auth']['userName']
         self.apikey = config['auth']['apikey']
         self.requester = Requester(self.userName, self.apikey)
-        
+
         self.baseUrl = config['url']['baseurl']
         self.apiparturl = config['url']['apiparturl']
         
