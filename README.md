@@ -34,3 +34,11 @@ python jira.py
 | -a, --action | String | listBoards                                        | Yes      |
 | --boardName  | String | The name or part of the name of the desired board | No       |
 | --maxBoards  | Int    | Default to 50                                     | No       |
+
+## Issues by board 
+| Option       | type   | Value                                 | Required |
+|--------------|--------|---------------------------------------|----------|
+| -a, --action | String | issuesByBoard                         | Yes      |
+| boardId      | Int    | The id of the board                   | Yes      |
+| startAt      | Int    | The record from which the query start |          |
+| maxResults   | Int    | Max number of results, by default 50  |          |
