@@ -1,5 +1,9 @@
 import argparse
 import configparser
+from os.path import expanduser
+
+homePath = expanduser("~")
+configFilePath = "%s%s%s" % (homePath, "/", ".config.ini")
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--baseUrl', type=str, help='The base url for the jira project')
@@ -30,5 +34,5 @@ config['metadataForIssues']['urlPart'] = '/api/2/issue/createmeta'
 config['sendIssue'] = {}
 config['sendIssue']['urlPart'] = '/api/2/issue'
 
-with open('config.ini', 'w') as configfile:
+with open(configFilePath, 'w') as configfile:
   config.write(configfile)
