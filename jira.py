@@ -36,6 +36,7 @@ class Requester():
         self.user = user
         self.password = password
         
+        # json header for the requests
         self.jsonContentType = {'Content-type': 'application/json'}
     
     """ Sends a generic get requests with the option to append values
@@ -46,12 +47,13 @@ class Requester():
     def getRequest(self, url, payload = None):
         return self.requests.get(url, auth=(self.user, self.password), params=payload)
         
-    """ Sends a generic post request
+    """ Sends a generic post request with a json object as its request body
     
     @param url string - url to make the requests to 
     @param payload dict - contains the values to be sent
     """
-    def postRequest(self, url, payload = None):
+    def postRequestWithJsonBody(self, url, payload = None):
+        # Converts the payload to josn
         payload = self.json.dumps(payload)
         return self.requests.post(url, auth=(self.user, self.password), data=payload, headers=self.jsonContentType)
         
@@ -114,7 +116,7 @@ class Jira(object):
             body['fields']['assignee']['key'] = userName
             body['fields']['assignee']['emailAddress'] = email
         
-        return self.requester.postRequest(self.createNewIssueUrl, body)
+        return self.requester.postRequestWithJsonBody(self.createNewIssueUrl, body)
 
 """ The application logic 
 
