@@ -1,6 +1,11 @@
+# Jira from shell 
+### This is a tool meant to be run from the  command line with the intention of being simple, light and easy to manage hence all contained within a single file.
+
+### The script allows to interact with the jira cloud platform in a way that it's easy to create a wrapper around it to place one's logic over it for virtually any purpose be it generating statistics about issues, opening new issues, and many more.
+
 # Setting up the project
 
-### To install the dependencies 
+### While most python installations should already contain the necessary modules by default they can be installed by running the following command
 ```sh
 sudo pip install --upgrade pip
 pip install -r requirements.txt
