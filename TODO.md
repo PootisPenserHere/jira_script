@@ -1,6 +1,4 @@
 - Add support for jql when listing issues 
-- Change the default location of the config file to $HOME
--   The file name should start with a dot 
 - Adapt the default behaivor or the parms to be taken from the config rather than use the defaults from jira
 - Update the README with the new layout for parms and usage of the methods
 - Add short codes for the script params

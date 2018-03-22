@@ -64,10 +64,13 @@ as container for the interaction logic
 class Jira(object):
     def __init__(self, Requester):
         import configparser
+        from os.path import expanduser
         
         # Parsing data from the config file
+        homePath = expanduser("~")
+        configFilePath = "%s%s%s" % (homePath, "/", ".config.ini")
         config = configparser.ConfigParser()
-        config.read('config.ini')
+        config.read(configFilePath)
         
         # Intantiates the requester class
         self.requester = Requester(config['auth']['userName'], config['auth']['apikey'])
