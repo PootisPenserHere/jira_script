@@ -57,3 +57,23 @@ python jira.py
 | --boardId    | Int    | The id of the board                   | Yes      |
 | --startAt    | Int    | The record from which the query start | No       |
 | --maxResults | Int    | Max number of results, by default 50  | No       |
+
+## Metadata for issues 
+
+### Parameters
+| Option       | Type   | Value             | Required |
+|--------------|--------|-------------------|----------|
+| -a, --action | String | metadataForIssues | Yes      |
+
+## Creating a new issue 
+
+### Params
+| Option        | Type   | Value                                                     | Required |
+|---------------|--------|-----------------------------------------------------------|----------|
+| -a, --action  | String | metadataForIssues                                         | Yes      |
+| --projectId   | Int    | The id of the project                                     | No       |
+| --summary     | String | A summary of the issue                                    | No       |
+| --description | String | A description of the issue                                | No       |
+| --issuetype   | Int    | The id of the issue, can be taken from the issue metadata | No       |
+| --userName    | String | The username to whom the issue will be assigned           | No       |
+| --email       | String | The email to whom the issue will be assigned              | No       |
