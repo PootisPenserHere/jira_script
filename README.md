@@ -67,7 +67,7 @@ python jira.py
 
 ## Creating a new issue 
 
-### Params
+### Parameters
 | Option        | Type   | Value                                                     | Required |
 |---------------|--------|-----------------------------------------------------------|----------|
 | -a, --action  | String | metadataForIssues                                         | Yes      |

@@ -6,9 +6,10 @@ homePath = expanduser("~")
 configFilePath = "%s%s%s" % (homePath, "/", ".config.ini")
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--baseUrl', type=str, help='The base url for the jira project')
-parser.add_argument('--userName', type=str, help='The user name to use for authentication')
-parser.add_argument('--apiKey', type=str, help='The api key for jira, will be used instead of a password')
+requiredNamed = parser.add_argument_group('Required named arguments')
+requiredNamed.add_argument('--baseUrl', type=str, help='The base url for the jira project', required=True)
+requiredNamed.add_argument('--userName', type=str, help='he user name to use for authentication', required=True)
+requiredNamed.add_argument('--apiKey', type=str, help='The api key for jira, will be used instead of a password', required=True)
 args = parser.parse_args()
 
 config = configparser.ConfigParser()
