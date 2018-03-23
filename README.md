@@ -17,7 +17,7 @@ pip install -r requirements.txt
 python setup.py --baseUrl <jira url> --userName <jira username> --apiKey <jira api key>
 ```
 
-### Parameters
+### Required parameters
 |   Option   | Type   | Value                                                                   |
 |:----------:|--------|-------------------------------------------------------------------------|
 | --baseUrl  | String | The url to acces the jira project: example.com:8080 or domain.jira.net  |              |
@@ -34,7 +34,7 @@ chmod +x $HOME/bin/jira.py
 
 # Using the script 
 
-### Basic usage
+## Basic usage
 ```sh
 python jira.py
 ```
@@ -42,16 +42,18 @@ python jira.py
 ## Listing boards 
 
 ### Parameters
-| Option       | type   | Value                                             | Required |
-|--------------|--------|---------------------------------------------------|----------|
-| -a, --action | String | listBoards                                        | Yes      |
-| --boardName  | String | The name or part of the name of the desired board | No       |
-| --maxBoards  | Int    | Default to 50                                     | No       |
+| Option       | Type   | Value                                        | Required |
+|--------------|--------|----------------------------------------------|----------|
+| -a, --action | String | listBoards                                   | Yes      |
+| --name       | String | All or part of the name of the desired board | No       |
+| --maxResults | Int    | Max number of results, by default 50         | No       |
 
-## Issues by board 
-| Option       | type   | Value                                 | Required |
+## Issues by board
+
+### Parameters  
+| Option       | Type   | Value                                 | Required |
 |--------------|--------|---------------------------------------|----------|
 | -a, --action | String | issuesByBoard                         | Yes      |
-| boardId      | Int    | The id of the board                   | Yes      |
-| startAt      | Int    | The record from which the query start |          |
-| maxResults   | Int    | Max number of results, by default 50  |          |
+| --boardId    | Int    | The id of the board                   | Yes      |
+| --startAt    | Int    | The record from which the query start | No       |
+| --maxResults | Int    | Max number of results, by default 50  | No       |
