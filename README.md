@@ -16,13 +16,6 @@ pip install -r requirements.txt
 ```sh
 python setup.py --baseUrl <jira url> --userName <jira username> --apiKey <jira api key>
 ```
-### After the config file has been created the config scrip may be removed
-
-### Optionally the jira script may be moved to the user's bin folder to be called as a shell command  
-```sh
-cp jira.py $HOME/bin/
-chmod +x $HOME/bin/jira.py
-```
 
 ### Parameters
 |   Option   | Type   | Value                                                                   |
@@ -31,6 +24,13 @@ chmod +x $HOME/bin/jira.py
 | --userName | String | The user name used to login                                             |
 | --apiKey   | String | The generated api key from the jira interface, will be used as password |
 
+### After the config file has been created the config scrip may be removed
+
+### Optionally the jira script may be moved to the user's bin folder to be called as a shell command  
+```sh
+cp jira.py $HOME/bin/
+chmod +x $HOME/bin/jira.py
+```
 
 # Using the script 
 
