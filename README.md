@@ -11,9 +11,17 @@ sudo pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### Configuring the enviroment
+## Configuring the enviroment
+### This will create a file named .config.ini which will be stored in the home directory of the user
 ```sh
 python setup.py --baseUrl <jira url> --userName <jira username> --apiKey <jira api key>
+```
+### After the config file has been created the config scrip may be removed
+
+### Optionally the jira script may be moved to the user's bin folder to be called as a shell command  
+```sh
+cp jira.py $HOME/bin/
+chmod +x $HOME/bin/jira.py
 ```
 
 ### Parameters
