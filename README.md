@@ -1,4 +1,6 @@
 # Jira from shell 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPootisPenserHere%2Fjira_script.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FPootisPenserHere%2Fjira_script?ref=badge_shield)
+
 ### This is a tool meant to be run from the  command line with the intention of being simple, light and easy to manage hence all contained within a single file.
 
 ### The script allows to interact with the jira cloud platform in a way that it's easy to create a wrapper around it to place one's logic over it for virtually any purpose be it generating statistics about issues, opening new issues, and many more.
@@ -77,3 +79,6 @@ python jira.py
 | --issuetype   | Int    | The id of the issue, can be taken from the issue metadata | No       |
 | --userName    | String | The username to whom the issue will be assigned           | No       |
 | --email       | String | The email to whom the issue will be assigned              | No       |
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FPootisPenserHere%2Fjira_script.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FPootisPenserHere%2Fjira_script?ref=badge_large)
