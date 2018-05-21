@@ -14,9 +14,16 @@ pip install -r requirements.txt
 ```
 
 ### Configuring the enviroment
-#### This will create a file named .config.ini which will be stored in the home directory of the user
+##### This will create a file named .config.ini which will be stored in the home directory of the user
+
+#### Inside virtualenv or similar
 ```sh
 python setup.py --baseUrl <jira url> --userName <jira username> --apiKey <jira api key>
+```
+
+#### Alternatively the project may be used alongside docker on which case the passed parameters will remain in the image as enviroment parameters, for this the image must be first build 
+```sh
+docker build . -t jira_script:v1 --build-arg BASE_URL=<jira url> --build-arg USER_NAME=<jira username> --build-arg API_KEY=<jira api key>
 ```
 
 #### Required parameters
